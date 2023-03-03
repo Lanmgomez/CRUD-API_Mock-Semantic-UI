@@ -7,8 +7,6 @@ const Read = () => {
 
   // get api data
   const [APIData, setAPIData] = useState([]);
-
-  // get id for each data
   
   useEffect(() => {
     axios.get(`https://64009b6829deaba5cb3b893a.mockapi.io/CRUD`)
@@ -25,6 +23,14 @@ const Read = () => {
       localStorage.setItem('Checkbox Value', checkbox)
  }
 
+  const onDelete = (id) => {
+    axios.delete(`https://64009b6829deaba5cb3b893a.mockapi.io/CRUD/${id}`)
+      .then(() => { 
+        const updatedList = APIData.filter((item) => item.id !== id)
+          setAPIData(updatedList)
+       })
+  }
+
   return (
     <div>
       <Table singleLine>
@@ -34,6 +40,7 @@ const Read = () => {
             <Table.HeaderCell>Last Name</Table.HeaderCell>
             <Table.HeaderCell>Checked</Table.HeaderCell>
             <Table.HeaderCell>Update</Table.HeaderCell>
+            <Table.HeaderCell>Delete</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -46,6 +53,9 @@ const Read = () => {
                 <Link to='/update'>
                   <Button onClick={() => setDataID(data)}>Update</Button>
                 </Link>
+              </Table.Cell>
+              <Table.Cell> 
+                  <Button onClick={() => onDelete(data.id)}>Delete</Button>
               </Table.Cell>
             </Table.Row>
           ))}

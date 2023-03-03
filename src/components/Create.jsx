@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { Button, Checkbox, Form } from 'semantic-ui-react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 const Create = () => {
+
+    const navigate = useNavigate()
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -14,7 +17,8 @@ const Create = () => {
 
     const postData = () => {
         axios.post(`https://64009b6829deaba5cb3b893a.mockapi.io/CRUD`, datas)
-        console.log(datas);
+             .then(() => { navigate('/read') })
+        
     }
 
   return (
