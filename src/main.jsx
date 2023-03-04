@@ -9,11 +9,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Create from './components/Create'
 import Read from './components/Read'
 import Update from './components/Update'
+import Home from './pages/Home'
 
 const router = createBrowserRouter([
   {
     element: <App />,
     children:[
+      { path: "/", element: <Home /> },
       { path: "/create", element: <Create /> },
       { path: "/read", element: <Read /> },
       { path: "/update", element: <Update />}
